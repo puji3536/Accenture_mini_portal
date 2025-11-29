@@ -1,0 +1,1103 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pujitha's Dashboard | Accenture</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Accenture Brand Colors */
+        :root {
+            --accenture-purple: #A100FF;
+            --accenture-dark: #000000;
+            --accenture-light: #FFFFFF;
+            --accenture-gray: #F2F2F2;
+            --accenture-blue: #0066CC;
+            --accenture-green: #00CC66;
+            --accenture-yellow: #FFCC00;
+            --accenture-red: #FF3333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--accenture-gray);
+            color: var(--accenture-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--accenture-dark);
+            color: var(--accenture-light);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--accenture-purple);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--accenture-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accenture-light);
+            font-weight: 600;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, var(--accenture-dark) 0%, var(--accenture-purple) 100%);
+            color: var(--accenture-light);
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .welcome-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-text p {
+            opacity: 0.9;
+        }
+
+        .date-display {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .date-display .day {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .date-display .date {
+            font-size: 1rem;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            background-color: var(--accenture-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        .sidebar h3 {
+            color: var(--accenture-purple);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accenture-gray);
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 0.8rem;
+        }
+
+        .sidebar a {
+            color: var(--accenture-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            color: var(--accenture-purple);
+            background-color: rgba(161, 0, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--accenture-gray);
+            border-radius: 6px;
+            transition: transform 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: scale(1.03);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accenture-purple);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--accenture-dark);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--accenture-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--accenture-purple);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .task-list {
+            list-style: none;
+        }
+
+        .task-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--accenture-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .task-item:hover {
+            background-color: var(--accenture-gray);
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-info {
+            flex: 1;
+        }
+
+        .task-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .task-project {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .task-due {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accenture-purple);
+            color: var(--accenture-light);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background-color: #8A00E0;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--accenture-purple);
+            color: var(--accenture-purple);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--accenture-purple);
+            color: var(--accenture-light);
+        }
+
+        .priority-high {
+            border-left: 4px solid var(--accenture-red);
+        }
+
+        .priority-medium {
+            border-left: 4px solid var(--accenture-yellow);
+        }
+
+        .priority-low {
+            border-left: 4px solid var(--accenture-green);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .project-card {
+            background-color: var(--accenture-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-client {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .project-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background-color: var(--accenture-blue);
+            color: var(--accenture-light);
+        }
+
+        .status-completed {
+            background-color: var(--accenture-green);
+            color: var(--accenture-dark);
+        }
+
+        .status-upcoming {
+            background-color: var(--accenture-gray);
+            color: var(--accenture-dark);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: #ddd;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--accenture-purple);
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+
+        .project-team {
+            display: flex;
+            margin-top: 1rem;
+        }
+
+        .team-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--accenture-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accenture-light);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: -8px;
+            border: 2px solid var(--accenture-light);
+        }
+
+        .upcoming-events {
+            list-style: none;
+        }
+
+        .event-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--accenture-gray);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .event-item:last-child {
+            border-bottom: none;
+        }
+
+        .event-date {
+            background-color: var(--accenture-purple);
+            color: var(--accenture-light);
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .event-date .day {
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .event-date .month {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+
+        .event-details {
+            flex: 1;
+        }
+
+        .event-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .event-time {
+            font-size: 0.9rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        footer {
+            background-color: var(--accenture-dark);
+            color: var(--accenture-light);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--accenture-purple);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--accenture-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accenture-purple);
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--accenture-light);
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--accenture-dark);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            background-color: var(--accenture-green);
+            color: var(--accenture-dark);
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 1001;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .welcome-section {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Accenture<span>Employee Portal</span></h1>
+        </div>
+        <div class="user-info">
+            <div>
+                <p>Welcome back, <strong>Pujitha</strong></p>
+                <p style="font-size: 0.9rem; opacity: 0.8;">Technology Analyst</p>
+            </div>
+            <div class="user-avatar">P</div>
+        </div>
+    </header>
+
+    <section class="welcome-section">
+        <div class="welcome-text">
+            <h2>Your Work Dashboard</h2>
+            <p>Here's your overview of tasks, projects, and upcoming events</p>
+        </div>
+        <div class="date-display">
+            <div class="day">Monday</div>
+            <div class="date">October 16, 2023</div>
+        </div>
+    </section>
+
+    <div class="dashboard">
+        <aside class="sidebar">
+            <h3>Quick Actions</h3>
+            <ul>
+                <li><a href="#" class="active" data-action="tasks"><i class="fas fa-tasks"></i> My Tasks</a></li>
+                <li><a href="#" data-action="projects"><i class="fas fa-project-diagram"></i> My Projects</a></li>
+                <li><a href="#" data-action="schedule"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
+                <li><a href="#" data-action="documents"><i class="fas fa-file-alt"></i> Documents</a></li>
+                <li><a href="#" data-action="performance"><i class="fas fa-chart-line"></i> Performance</a></li>
+                <li><a href="#" data-action="messages"><i class="fas fa-comments"></i> Messages</a></li>
+            </ul>
+
+            <div class="quick-stats">
+                <h3>My Stats</h3>
+                <div class="stat-item" data-stat="tasks">
+                    <div class="stat-label">Tasks Completed</div>
+                    <div class="stat-value">24</div>
+                </div>
+                <div class="stat-item" data-stat="projects">
+                    <div class="stat-label">Active Projects</div>
+                    <div class="stat-value">5</div>
+                </div>
+                <div class="stat-item" data-stat="deadlines">
+                    <div class="stat-label">Upcoming Deadlines</div>
+                    <div class="stat-value">3</div>
+                </div>
+                <div class="stat-item" data-stat="training">
+                    <div class="stat-label">Training Hours</div>
+                    <div class="stat-value">18</div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="card">
+                <h3><i class="fas fa-list-check"></i> My Tasks</h3>
+                <ul class="task-list">
+                    <li class="task-item priority-high">
+                        <div class="task-info">
+                            <div class="task-title">Complete API integration for Client Portal</div>
+                            <div class="task-project">Global Bank Digital Transformation</div>
+                        </div>
+                        <div class="task-due">
+                            <i class="fas fa-clock"></i> Due tomorrow
+                        </div>
+                        <div class="task-actions">
+                            <button class="btn" data-task="api-integration">Update</button>
+                        </div>
+                    </li>
+                    <li class="task-item priority-medium">
+                        <div class="task-info">
+                            <div class="task-title">Prepare presentation for stakeholder review</div>
+                            <div class="task-project">Retail Analytics Platform</div>
+                        </div>
+                        <div class="task-due">
+                            <i class="fas fa-clock"></i> Due in 3 days
+                        </div>
+                        <div class="task-actions">
+                            <button class="btn" data-task="presentation">Update</button>
+                        </div>
+                    </li>
+                    <li class="task-item priority-low">
+                        <div class="task-info">
+                            <div class="task-title">Review code for security compliance</div>
+                            <div class="task-project">Healthcare Data System</div>
+                        </div>
+                        <div class="task-due">
+                            <i class="fas fa-clock"></i> Due next week
+                        </div>
+                        <div class="task-actions">
+                            <button class="btn" data-task="code-review">Update</button>
+                        </div>
+                    </li>
+                    <li class="task-item priority-medium">
+                        <div class="task-info">
+                            <div class="task-title">Complete Cloud Migration training module</div>
+                            <div class="task-project">Learning & Development</div>
+                        </div>
+                        <div class="task-due">
+                            <i class="fas fa-clock"></i> Due in 5 days
+                        </div>
+                        <div class="task-actions">
+                            <button class="btn" data-task="training">Update</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-project-diagram"></i> My Projects</h3>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <div class="project-title">Global Bank Digital Transformation</div>
+                                <div class="project-client">Client: Global Bank Corp</div>
+                            </div>
+                            <span class="project-status status-active">Active</span>
+                        </div>
+                        <p>Developing a new customer portal with enhanced security features and mobile responsiveness.</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                            <span>Progress: 75%</span>
+                            <span>Due: Nov 30</span>
+                        </div>
+                        <div class="project-team">
+                            <div class="team-avatar">P</div>
+                            <div class="team-avatar">B</div>
+                            <div class="team-avatar">PI</div>
+                            <div class="team-avatar" style="background-color: var(--accenture-gray); color: var(--accenture-dark);">+2</div>
+                        </div>
+                        <button class="btn" style="margin-top: 1rem; width: 100%;" data-project="bank-transformation">View Project Details</button>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <div class="project-title">Retail Analytics Platform</div>
+                                <div class="project-client">Client: Fashion Retail Inc</div>
+                            </div>
+                            <span class="project-status status-active">Active</span>
+                        </div>
+                        <p>Building a data analytics dashboard to provide insights into customer behavior and sales trends.</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 45%"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                            <span>Progress: 45%</span>
+                            <span>Due: Dec 15</span>
+                        </div>
+                        <div class="project-team">
+                            <div class="team-avatar">P</div>
+                            <div class="team-avatar">B</div>
+                            <div class="team-avatar">PI</div>
+                        </div>
+                        <button class="btn" style="margin-top: 1rem; width: 100%;" data-project="retail-analytics">View Project Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-calendar-day"></i> Upcoming Events</h3>
+                <ul class="upcoming-events">
+                    <li class="event-item">
+                        <div class="event-date">
+                            <div class="day">18</div>
+                            <div class="month">Oct</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="event-title">Client Review Meeting</div>
+                            <div class="event-time"><i class="fas fa-clock"></i> 10:00 AM - 11:30 AM</div>
+                        </div>
+                        <button class="btn btn-outline" data-event="client-meeting">Join</button>
+                    </li>
+                    <li class="event-item">
+                        <div class="event-date">
+                            <div class="day">20</div>
+                            <div class="month">Oct</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="event-title">Team Innovation Workshop</div>
+                            <div class="event-time"><i class="fas fa-clock"></i> 2:00 PM - 4:00 PM</div>
+                        </div>
+                        <button class="btn btn-outline" data-event="workshop">Details</button>
+                    </li>
+                    <li class="event-item">
+                        <div class="event-date">
+                            <div class="day">25</div>
+                            <div class="month">Oct</div>
+                        </div>
+                        <div class="event-details">
+                            <div class="event-title">Project Deadline: Phase 1</div>
+                            <div class="event-time"><i class="fas fa-clock"></i> All day</div>
+                        </div>
+                        <button class="btn btn-outline" data-event="deadline">Update</button>
+                    </li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#" data-resource="hr">HR Portal</a></li>
+                    <li><a href="#" data-resource="learning">Learning Management</a></li>
+                    <li><a href="#" data-resource="it">IT Support</a></li>
+                    <li><a href="#" data-resource="templates">Project Templates</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="#" data-tool="time">Time Tracking</a></li>
+                    <li><a href="#" data-tool="expense">Expense Reporting</a></li>
+                    <li><a href="#" data-tool="collaboration">Collaboration Spaces</a></li>
+                    <li><a href="#" data-tool="knowledge">Knowledge Base</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#" data-support="manager">Contact Manager</a></li>
+                    <li><a href="#" data-support="helpdesk">IT Help Desk</a></li>
+                    <li><a href="#" data-support="hr">HR Services</a></li>
+                    <li><a href="#" data-support="feedback">Feedback</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Accenture. All rights reserved. | Employee Dashboard for Pujitha</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="taskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Update Task Status</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="taskForm">
+                <div class="form-group">
+                    <label for="taskName">Task Name</label>
+                    <input type="text" id="taskName" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="taskStatus">Status</label>
+                    <select id="taskStatus" required>
+                        <option value="">Select Status</option>
+                        <option value="not-started">Not Started</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                        <option value="blocked">Blocked</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="taskNotes">Notes</label>
+                    <textarea id="taskNotes" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="cancelTask">Cancel</button>
+                    <button type="submit" class="btn">Update Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Project Details</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div id="projectDetails">
+                <!-- Project details will be loaded here -->
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-outline" id="closeProject">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        Action completed successfully!
+    </div>
+
+    <script>
+        // DOM Elements
+        const taskModal = document.getElementById('taskModal');
+        const projectModal = document.getElementById('projectModal');
+        const taskForm = document.getElementById('taskForm');
+        const cancelTaskBtn = document.getElementById('cancelTask');
+        const closeProjectBtn = document.getElementById('closeProject');
+        const closeModalBtns = document.querySelectorAll('.close-modal');
+        const notification = document.getElementById('notification');
+        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        const taskButtons = document.querySelectorAll('.task-actions .btn');
+        const projectButtons = document.querySelectorAll('.project-card .btn');
+        const eventButtons = document.querySelectorAll('.event-item .btn');
+        const footerLinks = document.querySelectorAll('.footer-section a');
+        const statItems = document.querySelectorAll('.stat-item');
+
+        // Show notification
+        function showNotification(message) {
+            notification.textContent = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Show modal
+        function showModal(modal) {
+            modal.style.display = 'flex';
+        }
+
+        // Hide modal
+        function hideModal(modal) {
+            modal.style.display = 'none';
+        }
+
+        // Update the date display
+        function updateDate() {
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            
+            const today = new Date();
+            const dayName = days[today.getDay()];
+            const monthName = months[today.getMonth()];
+            const date = today.getDate();
+            const year = today.getFullYear();
+            
+            document.querySelector('.day').textContent = dayName;
+            document.querySelector('.date').textContent = `${monthName} ${date}, ${year}`;
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDate();
+            
+            // Animate progress bars on page load
+            const progressBars = document.querySelectorAll('.progress');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+
+        // Sidebar navigation
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                sidebarLinks.forEach(l => l.classList.remove('active'));
+                
+                // Add active class to clicked link
+                link.classList.add('active');
+                
+                const action = link.getAttribute('data-action');
+                showNotification(`Navigating to ${action.replace('-', ' ')}...`);
+            });
+        });
+
+        // Task buttons
+        taskButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const task = button.getAttribute('data-task');
+                const taskTitle = button.closest('.task-item').querySelector('.task-title').textContent;
+                
+                // Populate the task form
+                document.getElementById('taskName').value = taskTitle;
+                
+                // Show the modal
+                showModal(taskModal);
+            });
+        });
+
+        // Project buttons
+        projectButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const project = button.getAttribute('data-project');
+                const projectCard = button.closest('.project-card');
+                const projectTitle = projectCard.querySelector('.project-title').textContent;
+                const projectClient = projectCard.querySelector('.project-client').textContent;
+                const projectDescription = projectCard.querySelector('p').textContent;
+                const projectProgress = projectCard.querySelector('.progress').style.width;
+                
+                // Populate project details
+                document.getElementById('projectDetails').innerHTML = `
+                    <h4>${projectTitle}</h4>
+                    <p>${projectClient}</p>
+                    <p>${projectDescription}</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: ${projectProgress}"></div>
+                    </div>
+                    <p>Progress: ${projectProgress}</p>
+                    <h4>Team Members</h4>
+                    <p>Pujitha (You), Bannu,Pintu,Kittu,</p>
+                    <h4>Next Steps</h4>
+                    <ul>
+                        <li>Complete API integration</li>
+                        <li>Conduct user testing</li>
+                        <li>Prepare deployment documentation</li>
+                    </ul>
+                `;
+                
+                // Show the modal
+                showModal(projectModal);
+            });
+        });
+
+        // Event buttons
+        eventButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const event = button.getAttribute('data-event');
+                const eventTitle = button.closest('.event-item').querySelector('.event-title').textContent;
+                
+                if (button.textContent === 'Join') {
+                    showNotification(`Joining ${eventTitle}...`);
+                } else if (button.textContent === 'Details') {
+                    showNotification(`Showing details for ${eventTitle}`);
+                } else if (button.textContent === 'Update') {
+                    showNotification(`Updating status for ${eventTitle}`);
+                }
+            });
+        });
+
+        // Footer links
+        footerLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const resource = link.getAttribute('data-resource') || 
+                                link.getAttribute('data-tool') || 
+                                link.getAttribute('data-support');
+                showNotification(`Opening ${resource}...`);
+            });
+        });
+
+        // Stat items
+        statItems.forEach(stat => {
+            stat.addEventListener('click', () => {
+                const statType = stat.getAttribute('data-stat');
+                showNotification(`Viewing details for ${statType.replace('-', ' ')}`);
+            });
+        });
+
+        // Task form submission
+        taskForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const taskName = document.getElementById('taskName').value;
+            const taskStatus = document.getElementById('taskStatus').value;
+            showNotification(`Task "${taskName}" updated to ${taskStatus.replace('-', ' ')}`);
+            hideModal(taskModal);
+            taskForm.reset();
+        });
+
+        // Cancel task update
+        cancelTaskBtn.addEventListener('click', () => {
+            hideModal(taskModal);
+            taskForm.reset();
+        });
+
+        // Close project modal
+        closeProjectBtn.addEventListener('click', () => {
+            hideModal(projectModal);
+        });
+
+        // Close modals
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modal = btn.closest('.modal');
+                hideModal(modal);
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                hideModal(e.target);
+            }
+        });
+    </script>
+</body>
+</html>
