@@ -1,3 +1,4 @@
 **Company Dashboard**
+
 This project is a fully responsive Accenture-themed Employee Dashboard designed to replicate a modern corporate portal experience. Built using pure HTML, CSS, and JavaScript, it provides a clean, interactive interface featuring modules for tasks, projects, schedules, stats, and upcoming events. The dashboard includes animated progress bars, dynamic date updates, task-update modals, project-details popups, and notification systems—offering a realistic simulation of an internal employee workspace. With an elegant UI inspired by Accenture’s branding, the portal is optimized for both desktop and mobile screens. This project showcases front-end development skills, UI/UX design, and interactive DOM manipulation. <br><br>
 The live deployment is available here: https://accenture-mini-portal.netlify.app/
